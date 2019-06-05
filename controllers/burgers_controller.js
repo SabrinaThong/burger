@@ -31,10 +31,7 @@ router.put("/:id", function(req,res) {
             devoured: req.body.devoured
         },
         condition,
-        function(result) {  
-            if (result.changedRows === 0) {
-                return res.status(404).end();
-            }
+        function() {     
             res.redirect("/");
         });
           
