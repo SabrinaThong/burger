@@ -15,7 +15,7 @@ router.get("/", function(req,res) {
 
 router.post("/", function(req,res) {
     burger.insertOne(["burger_name","devoured"], [req.body.burger_name, req.body.devoured], 
-        function(result) 
+        function() 
             {
                 res.redirect("/");
             });
@@ -35,7 +35,7 @@ router.put("/:id", function(req,res) {
             if (result.changedRows === 0) {
                 return res.status(404).end();
             }
-            res.status(200).end();
+            res.redirect("/");
         });
           
 });
