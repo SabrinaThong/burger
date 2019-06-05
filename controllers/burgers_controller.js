@@ -15,9 +15,9 @@ router.get("/", function(req,res) {
 
 router.post("/", function(req,res) {
     burger.insertOne(["burger_name","devoured"], [req.body.burger_name, req.body.devoured], 
-        function() 
+        function(result) 
             {
-                res.redirect("/");
+                res.json({ id: result.insertId });
             });
     });
 
@@ -30,9 +30,12 @@ router.put("/:id", function(req,res) {
         {
             devoured: req.body.devoured
         },
-        condition, 
-        function() {
-            res.redirect("/");
+        condition,
+        function(result) {  
+            if (result.changedRows === 0) {
+                return res.status(404).end();
+            }
+            res.status(200).end();
         });
           
 });
